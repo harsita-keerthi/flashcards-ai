@@ -39,6 +39,13 @@ npm i @stripe/stripe-js
 ```
 
 
+## Install @clerk/nextjs
+The package to use with Clerk and NextJS.
+
+```bash
+npm install @clerk/nextjs
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -1,13 +1,12 @@
-'use client';
-
-import Image from 'next/image';
+//import Image from 'next/image';
 import getStripe from '@/utils/get-stripe';
-import { AppBar, Toolbar, Typography, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import { Button, Container } from '@mui/material';
+
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { AppBar, Button, Container, Toolbar, Typography, Box } from '@mui/material';
 import Head from 'next/head';
 
 export default function Home() {
-	<Container maxWidth='lg'>
+	<Container maxWidth='100v'>
 		<Head>
 			<title>Flashcard SaaS</title>
 			<meta name='description' content='Create flashcard from your text' />
@@ -16,12 +15,11 @@ export default function Home() {
 		<AppBar position='static'>
 			<Toolbar>
 				<Typography variant='h6' stype={{ flexGrow: 1 }}>
-					{' '}
 					Flashcard SaaS
 				</Typography>
 				<SignedOut>
-					<Button>Login</Button>
-					<Button>Sign Up</Button>
+					<Button color='inherit'>Login</Button>
+					<Button color='inherit'>Sign Up</Button>
 				</SignedOut>
 
 				<SignedIn>
@@ -29,5 +27,12 @@ export default function Home() {
 				</SignedIn>
 			</Toolbar>
 		</AppBar>
+		<Box>
+			<Typography variant='h2'> Welcome to Flashcard SaaS</Typography>
+			<Typography variant='h5'> The easist way to make flashcards from your text</Typography>
+			<Button variant='contained' color='primary' sx={{ mt: 2 }}>
+				GET STARTED
+			</Button>
+		</Box>
 	</Container>;
 }
