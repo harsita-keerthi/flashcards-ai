@@ -14,85 +14,23 @@ export default function Home() {
 				<meta name='description' content='Create flashcard from your text' />
 			</Head>
 
-			{/* <AppBar position='static'>
-				<Toolbar>
-					<Typography variant='h6' style={{ flexGrow: 1 }}>
-						Flashcard SaaS
-					</Typography>
-					<SignedOut>
-						<Button color='inherit'>Login</Button>
-						<Button color='inherit'>Sign Up</Button>
-					</SignedOut>
-
-					<SignedIn>
-						<UserButton />
-					</SignedIn>
-				</Toolbar>
-			</AppBar>
-
-			<Box sx={{ textAlign: 'center', my: 4 }}>
-				<Typography variant='h2' gutterBottom>
-					{' '}
-					Welcome to Flashcard SaaS
-				</Typography>
-				<Typography variant='h5' gutterBottom>
-					{' '}
-					The easiest way to make flashcards from your text
-				</Typography>
-				<Button variant='contained' color='primary' sx={{ mt: 2 }}>
-					GET STARTED
-				</Button>
-			</Box>
-
-			<Box sx={{ my: 6, textAlign: 'center' }}>
-				<Typography variant='h4' gutterBottom>
-					Features
-				</Typography>
-				<Grid container spacing={4}>
-					<Grid item xs={12} md={4}>
-						<Typography variant='h6' gutterBottom>
-							Easy Text Input
-						</Typography>
-						<Typography>
-							Simply input your text and let our software do the rest. Creating flashcard has never been easier.
-						</Typography>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<Typography variant='h6' gutterBottom>
-							Smart Flashcards
-						</Typography>
-						<Typography>
-							Our AI intelligently breaks down your text into concise flashcards, perfect for studying.
-						</Typography>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<Typography variant='h6' gutterBottom>
-							Accessible Anywhere
-						</Typography>
-						<Typography>
-							Access your flashcards from any device, at any time, Study on the go with ease.
-						</Typography>
-					</Grid>
-				</Grid>
-			</Box> */}
-
-			<AppBar position='static' 
+			<AppBar 
+				position='static' 
 				sx={{ 
 					width: '100%', 
 					background: 'linear-gradient(90deg, rgba(0, 87, 174, 1) 0%, rgba(0, 152, 255, 1) 100%)'
-				}}>				
+				}}
+			>				
 				<Toolbar sx={{ px: 2 }}>
 				<Typography variant='h6' style={{ flexGrow: 1, fontWeight: 'bold' }}>
 					Flashcard SaaS
 				</Typography>
 
 				<SignedOut>
-					<Button color='inherit' sx={{ borderRadius: '4px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2 }}>
+					<Button color='inherit' sx={{ borderRadius: '4px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2 }} href='/sign-in'>
 						Login
 					</Button>
-					<Button color='inherit' sx={{ borderRadius: '4px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+					<Button color='inherit' sx={{ borderRadius: '4px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }} href='/sign-up'>
 						Sign Up
 					</Button>
 				</SignedOut>
