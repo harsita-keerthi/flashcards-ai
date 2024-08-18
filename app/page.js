@@ -48,7 +48,8 @@ export default function Home() {
 				<Typography variant='h5' gutterBottom sx={{ lineHeight: '2.5' }}>
 					The easiest way to make flashcards from your text
 				</Typography>
-				<Button variant='contained' color='primary' sx={{ mt: 4, borderRadius: '24px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', px: 4, py: 1.5 }}>
+				<Button variant='contained' color='primary' sx={{ mt: 4, borderRadius: '24px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', px: 4, py: 1.5 }}
+					href="/generate">
 					GET STARTED
 				</Button>
 			</Box>
@@ -116,7 +117,7 @@ export default function Home() {
 								$0 / month
 							</Typography>
 							<Typography>Access to basic flashcard features with ads and limited storage.</Typography>
-							<Button variant='outlined' color='primary' sx={{ mt: 2 }}>
+							<Button variant='outlined' color='primary' sx={{ mt: 2 }} href="/generate">
 								GET STARTED
 							</Button>
 						</Box>
