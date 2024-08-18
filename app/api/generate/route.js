@@ -15,6 +15,7 @@ Both front and back should be one sentence long.
 9. If given a body of text, extract the most important and relevant information for the flashcards.
 10. Aim to create a balanced set of flashcards that covers the topic comprehensively.
 11. Only generate 10 flashcards.
+12. The back of the flash card should only contain the answer, not both the question and answer.
 
 You should return in the following JSON format:
 {
@@ -28,26 +29,21 @@ You should return in the following JSON format:
 `;
 
 export async function POST(req) {
-	const openai = new OpenAI();
-	const data = await req.text();
-
-	try {
-		const completion = await openai.chat.completions.create({
-			model: 'gpt-3.5-turbo', // Ensure you use an accessible model
-			messages: [
-				{ role: 'system', content: systemPrompt },
-				{ role: 'user', content: data },
-			],
-		});
-
-		const flashcards = JSON.parse(completion.choices[0].message.content);
-		return NextResponse.json(flashcards.flashcards);
-
-	} catch (error) {
-		console.error("Error generating flashcards:", error);
-		if (error.code === 'insufficient_quota') {
-			return NextResponse.json({ error: "Quota exceeded. Please try again later." }, { status: 429 });
-		}
-		return NextResponse.json({ error: "Error generating flashcards." }, { status: 500 });
-	}
-}
+	const openai = new OpenAI()
+	const data = await req.text()
+  
+	const completion = await openai.chat.completions.create({
+	  messages: [
+		{ role: 'system', content: systemPrompt },
+		{ role: 'user', content: data },
+	  ],
+	  model: 'gpt-4o-mini',
+	  response_format: { type: 'json_object' },
+	})
+  
+	// Parse the JSON response from the OpenAI API
+	const flashcards = JSON.parse(completion.choices[0].message.content)
+  
+	// Return the flashcards as a JSON response
+	return NextResponse.json(flashcards.flashcards)
+  }
