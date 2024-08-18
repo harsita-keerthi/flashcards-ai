@@ -11,7 +11,7 @@ import {useSearchParams} from 'next/navigation'
 export default function Flashcard(){
     const {isLoaded, isSignedIn, user} = useUser()
     const [flashcards, setFlashcards] = useState([])
-    const[flipped, setFlipped] = useState([])
+    const[flipped, setFlipped] = useState({})
 
     const searchParams = useSearchParams()
     const search = searchParams.get('id')
@@ -38,9 +38,9 @@ export default function Flashcard(){
         }))
     }
 
-    if (!isLoaded || !isSignedIn){
-        return <></>
-    }
+    // if (!isLoaded || !isSignedIn){
+    //     return <></>
+    // }
 
     return (
         <Container maxWidth="md">
