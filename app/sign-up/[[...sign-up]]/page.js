@@ -1,6 +1,9 @@
 import { SignUp } from "@clerk/nextjs";
 import { AppBar, Container, Toolbar, Button, Typography, Box } from "@mui/material";
 import Link from "next/link";
+import Footer from '../../footer';
+import HomeIcon from '@mui/icons-material/Home';
+
 
 export default function SignUpPage() {
     return <Container maxWidth="100vw"
@@ -20,16 +23,16 @@ export default function SignUpPage() {
                 }}
             >	
             <Toolbar sx={{ px: 2 }}>
-                <Typography 
-                    variant="h6" 
-                    sx={{ 
-                        flexGrow: 1, 
-                        fontWeight: 'bold', 
-                        fontFamily: 'Comic Sans MS, sans-serif'
-                    }}
-                >
-                    MemoAI
-                </Typography>
+                <Link href="/" passHref style={{ color: 'white', textDecoration: 'none' }}>
+                    <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+                        <HomeIcon sx={{ color: 'inherit' }} />
+                        <Typography variant='h6' style={{ fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+                            MemoAI
+                        </Typography>
+                    </Box>
+                </Link>
+
+                <Box sx={{ flexGrow: 1 }} />
 
                 <Button 
                     color='inherit' 
@@ -41,7 +44,7 @@ export default function SignUpPage() {
                         color: 'white' 
                     }}
                 >
-                    <Link href="/sign-in" passHref style={{ color: 'white', textDecoration: 'none' }}>
+                    <Link href="/sign-in" passHref style={{ color: 'white', textDecoration: 'none', padding: '0px 16px' }}>
                         Login
                     </Link>
                 </Button>
@@ -55,7 +58,7 @@ export default function SignUpPage() {
                         color: 'white' 
                     }}
                 >
-                    <Link href="/sign-up" passHref style={{ color: 'white', textDecoration: 'none' }}>
+                    <Link href="/sign-up" passHref style={{ color: 'white', textDecoration: 'none', padding: '0px 10px' }}>
                         Sign Up
                     </Link>
                 </Button>
@@ -69,8 +72,10 @@ export default function SignUpPage() {
             justifyContent="center"
         >
             <Typography variant="h4" sx={{mt: 4, mb: 3, fontWeight: 'bold', color: '#00796b'}}>
-                Sign Up
+                Sign Up 
             </Typography>
             <SignUp />
         </Box>
-    </Container>}
+        <Footer />
+    </Container>
+    }

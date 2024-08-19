@@ -8,6 +8,9 @@ import { writeBatch, getDoc, collection, doc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Footer from '../footer';
+import Link from "next/link";
+import HomeIcon from '@mui/icons-material/Home';
+
 
 export default function Generate() {
     const {isLoaded, isSignedIn, user} = useUser()
@@ -99,9 +102,16 @@ export default function Generate() {
 				}}
 			>                
 				<Toolbar sx={{ px: 2 }}>
-					<Typography variant='h6' style={{ flexGrow: 1, fontWeight: 'bold', fontFamily: 'sans-serif' }}>
-						MemoAI
-					</Typography>
+                    <Link href="/" passHref style={{ color: 'white', textDecoration: 'none' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+                            <HomeIcon sx={{ color: 'inherit' }} />
+                            <Typography variant='h6' style={{ fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+                                MemoAI
+                            </Typography>
+					    </Box>
+                    </Link>
+
+                    <Box sx={{ flexGrow: 1 }} />
                     
                     <SignedOut>
 						<Button color='inherit' sx={{ borderRadius: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2, backgroundColor: '#A6B37D', color: 'white' }} href='/sign-in'>
@@ -278,6 +288,7 @@ export default function Generate() {
                             fontSize: '1rem',
                             px: 5, 
                             py: 1.5,
+                            mt: 5,
                             backgroundColor: '#007aff',
                             color: '#fff',
                             textTransform: 'none',

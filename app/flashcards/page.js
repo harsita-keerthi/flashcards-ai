@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
@@ -22,6 +21,9 @@ import Head from "next/head";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the arrow icon
 import Link from "next/link";
+import Footer from '../footer';
+import HomeIcon from '@mui/icons-material/Home';
+
 
 export default function Flashcards() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -53,101 +55,55 @@ export default function Flashcards() {
   };
 
   return (
-    <Container
-      maxWidth="100vw"
+    <Container maxWidth="100vw"
       sx={{
-        background: "#ffffff",
+        backgroundImage: "url(/background.png)",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
         minHeight: "100vh",
-        paddingBottom: 4,
-        paddingTop: 0,
-      }}
-    >
-      <Head>
-        <title>MemoAI</title>
-        <meta name="description" content="Create flashcard from your text" />
-      </Head>
+        paddingBottom: 4
+      }}>
+      
+        <AppBar position='static' 
+          sx={{ 
+            width: '100%', 
+            background: '#5F6F65',
+            borderRadius: '0 0 16px 16px'
+          }}
+          >                
+          <Toolbar sx={{ px: 2 }}>
+            <Link href="/" passHref style={{ color: 'white', textDecoration: 'none' }}>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+                <HomeIcon sx={{ color: 'inherit' }} />
+                <Typography variant='h6' style={{ fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+                  MemoAI
+                </Typography>
+					    </Box>
+            </Link>
 
-      <AppBar
-        position="static"
-        sx={{
-          width: "100%",
-          background: "#5F6F65",
-          borderRadius: "0 0 16px 16px",
-        }}
-      >
-        <Toolbar sx={{ px: 2 }}>
-          <Typography
-            variant="h6"
-            style={{
-              flexGrow: 1,
-              fontWeight: "bold",
-              fontFamily: "Comic Sans MS, sans-serif",
-            }}
-          >
-            MemoAI
-          </Typography>
+            <Box sx={{ flexGrow: 1 }} />
 
-          <SignedOut>
-            <Button
-              color="inherit"
-              sx={{
-                borderRadius: "20px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                mr: 2,
-                backgroundColor: "#A6B37D",
-                color: "white",
-              }}
-              href="/sign-in"
-            >
-              Login
-            </Button>
-            <Button
-              color="inherit"
-              sx={{
-                borderRadius: "20px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                backgroundColor: "#A6B37D",
-                color: "white",
-              }}
-              href="/sign-up"
-            >
-              Sign Up
-            </Button>
-          </SignedOut>
-
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
-
-      {/* Back to Home button */}
-      <Box sx={{ mt: 2, ml: 2 }}>
-        <Link href="/" passHref>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            sx={{
-              paddingRight: "15px",
-              paddingLeft: "15px",
-              backgroundColor: "#A6B37D",
-              color: "white",
-              borderRadius: "20px",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#8C9E70",
-              },
-            }}
-          >
-            Back to Home
-          </Button>
-        </Link>
-      </Box>
+            
+            <SignedOut>
+              <Button color='inherit' sx={{ borderRadius: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2, backgroundColor: '#A6B37D', color: 'white' }} href='/sign-in'>
+                Login
+              </Button>
+              <Button color='inherit' sx={{ borderRadius: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', backgroundColor: '#A6B37D', color: 'white' }} href='/sign-up'>
+                Sign Up
+              </Button>
+            </SignedOut>
+  
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </Toolbar>
+        </AppBar>
 
       <Box
         sx={{
           textAlign: "center",
-          mt: 7,
+          mt: 10,
           mx: "auto",
           py: 4,
           px: 3,
@@ -195,26 +151,8 @@ export default function Flashcards() {
           ))}
         </Grid>
       </Box>
+      <Footer />
     </Container>
   );
 }
 
-{
-  /* <Container maxWidth="100vw">
-        <Grid container spacing={3} sx={{mt:4}}>
-            {flashcards.map((flashcard, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
-                    <CardActionArea onClick={() => {handleCardClick(flashcard.name)}}>
-                        <CardContent>
-                            <Typography variant="h6">
-                                {flashcard.name}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </Grid>
-            ))}
-        </Grid>
-    </Container> */
-}
