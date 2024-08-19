@@ -1,5 +1,6 @@
 "use client";
 
+<<<<<<< Updated upstream
 import Image from "next/image";
 import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -21,6 +22,39 @@ export default function Home() {
       headers: { origin: "http://localhost:3000" },
     });
     const checkoutSessionJson = await checkoutSession.json();
+=======
+import Image from 'next/image';
+import getStripe from '@/utils/get-stripe';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { AppBar, Button, Container, Toolbar, Typography, Box, Grid } from '@mui/material';
+import Head from 'next/head';
+import { useAuth, useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import Footer from './footer';
+
+
+export default function Home() {
+	const router = useRouter();
+    const { isSignedIn } = useAuth();
+    const { user } = useUser();
+
+    const handleGetStarted = () => {
+        if (isSignedIn) {
+            // User is signed in, redirect to /generate
+            router.push('/generate');
+        } else {
+            // User is not signed in, redirect to /sign-in
+            router.push('/sign-in');
+        }
+    };
+
+	const handleSubmit = async () => {
+		const checkoutSession = await fetch('/api/checkout_sessions', {
+		  method: 'POST',
+		  headers: { origin: 'http://localhost:3000' },
+		})
+		const checkoutSessionJson = await checkoutSession.json()
+>>>>>>> Stashed changes
 
     if (checkoutSession.statusCode === 500) {
       console.error(checkoutSession.message);
@@ -32,10 +66,25 @@ export default function Home() {
       sessionId: checkoutSessionJson.id,
     });
 
+<<<<<<< Updated upstream
     if (error) {
       console.warn(error.message);
     }
   };
+=======
+			<AppBar 
+				position='static' 
+				sx={{ 
+					width: '100%', 
+					background: '#5F6F65',
+					borderRadius: '0 0 16px 16px'
+				}}
+			>                
+				<Toolbar sx={{ px: 2 }}>
+					<Typography variant='h6' style={{ flexGrow: 1, fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+						MemoAI
+					</Typography>
+>>>>>>> Stashed changes
 
   return (
     <Container
@@ -74,6 +123,7 @@ export default function Home() {
             MemoAI
           </Typography>
 
+<<<<<<< Updated upstream
           <SignedOut>
             <Button
               color="inherit"
@@ -101,6 +151,37 @@ export default function Home() {
               Sign Up
             </Button>
           </SignedOut>
+=======
+			<Box sx={{ textAlign: 'center', mt: 8, mx: 'auto', py: 8, px: 3, maxWidth: '900px', borderRadius: 4, boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
+				<Typography variant='h2' sx={{ fontWeight: 'bold', color: '#00796b', mb: 2 }}>
+					Welcome to MemoAI
+				</Typography>
+				<Typography variant='h6' sx={{ lineHeight: '1.8', color: '#004d40', mb: 4 }}>
+					The easiest way to make flashcards from your text
+				</Typography>
+				<Button 
+					variant='contained' 
+					sx={{ 
+						borderRadius: '24px', 
+						boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)', 
+						px: 4, 
+						py: 1.5,
+						backgroundColor: '#007aff',
+						color: '#fff',
+						textTransform: 'none',
+						background: 'linear-gradient(90deg, rgba(0, 87, 174, 1) 0%, rgba(0, 152, 255, 1) 100%)',
+						transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+						'&:hover': {
+							transform: 'translateY(-2px)',
+							boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.3)',
+						}
+					}}
+					onClick={handleGetStarted}
+				>
+					Get Started
+				</Button>
+			</Box>
+>>>>>>> Stashed changes
 
           <SignedIn>
             <UserButton />
@@ -321,6 +402,7 @@ export default function Home() {
           Pricing
         </Typography>
 
+<<<<<<< Updated upstream
         <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} md={4}>
             <Box
@@ -658,3 +740,53 @@ export default function Home() {
     // </Container>
   );
 }
+=======
+					<Grid item xs={12} md={4}>
+						<Box
+							sx={{
+								p: 4,
+								mt: 2,
+								border: '1px solid',
+								borderColor: 'grey.300',
+								borderRadius: 4,
+								backgroundColor: '#f5f5f5',
+								boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.05)',
+								transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+								'&:hover': {
+									transform: 'translateY(-8px)',
+									boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.1)',
+								},
+							}}
+						>
+							<Typography variant='h5' gutterBottom sx={{ fontWeight: 'bold', color: '#424242' }}>
+								Pro
+							</Typography>
+							<Typography variant='h6' gutterBottom sx={{ color: '#757575', fontWeight: '600', '-webkit-text-stroke': '1px #5F6F65' }}>
+								$10 / month
+							</Typography>
+							<Typography color='textSecondary'>
+								Unlimited flashcards and storage, with priority support.
+							</Typography>
+							<Button 
+								variant='outlined' 
+								sx={{ 
+									mt: 2, 
+									borderColor: '#757575',
+									color: '#757575',
+									textTransform: 'none',
+									padding: '8px 24px',
+									borderRadius: 4,
+								}} 
+								onClick={handleSubmit}
+							>
+								Choose Pro
+							</Button>
+						</Box>
+					</Grid>
+				</Grid>
+			</Box>
+			<Footer />
+		</Container>
+	);
+	}
+>>>>>>> Stashed changes

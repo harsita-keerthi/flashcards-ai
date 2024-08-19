@@ -68,7 +68,7 @@ export default function SignUpPage() {
             alignItems="center"
             justifyContent="center"
         >
-            <Typography variant="h4" sx={{mt: 4, mb: 3}}>
+            <Typography variant="h4" sx={{mt: 4, mb: 3, fontWeight: 'bold', color: '#00796b'}}>
                 Sign Up
             </Typography>
             <SignUp />

@@ -39,14 +39,26 @@ const ResultPage = () => {
 
     if (loading) {
         return(
-            <Container maxWidth="100vw"
-            sx={{
-                textAlign: 'center',
-                mt: 4
-            }}
+            <Container 
+                maxWidth="100vw"
+                sx={{ 
+                    display: 'flex', // Enable flexbox
+                    flexDirection: 'column', // Stack items vertically
+                    justifyContent: 'center', // Center items vertically
+                    alignItems: 'center', // Center items horizontally
+                    textAlign: 'center',
+                    backgroundImage: 'url(/background.png)', 
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    minHeight: '100vh',
+                    paddingBottom: 4 
+                }}
             >
                 <CircularProgress />
-                <Typography variant="h6"> Loading... </Typography>
+                <Typography variant="h6" sx={{ mt: 5, fontSize: '1.5rem' }}> 
+                    Loading... 
+                </Typography>
             </Container>
         )
     }
@@ -54,9 +66,14 @@ const ResultPage = () => {
     if (error) {
         return (
             <Container maxWidth="100vw"
-            sx={{
+            sx={{ 
                 textAlign: 'center',
-                mt: 4
+                mt: 10,
+                backgroundImage: 'url(/background.png)', 
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                minHeight: '100vh', paddingBottom: 4 
             }}
             >
                 <Typography variant="h6"> {error} </Typography>
@@ -65,27 +82,64 @@ const ResultPage = () => {
     }
     return (
         <Container maxWidth="100vw"
-            sx={{
+            sx={{ 
                 textAlign: 'center',
-                mt: 4
+                backgroundImage: 'url(/background.png)', 
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                minHeight: '100vh', paddingBottom: 4 
             }}
             >
                 {session.payment_status === "paid" ? (
-                    <>
-                    <Typography variant="h4"> Payment Successful! </Typography>
-                    <Box sx={{mt:22}}>
-                        <Typography variant="h6"> Session ID: {session_id} </Typography>
-                        <Typography variant="body1"> 
-                            We have received your payment. You will receive an email with the order details shortly.  
-                        </Typography>
+                    <Box
+                    sx={{
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        justifyContent: 'center', 
+                        alignItems: 'center', 
+                        minHeight: '100vh', // Full height of the viewport
+                        textAlign: 'center', // Center text alignment
+                    }}>
+                        <img 
+                            src="/images/happy.png" 
+                            style={{
+                                width: '100px', 
+                                marginBottom: '30px', 
+                            }}
+                        />
+                        <Typography variant="h4" sx={{fontWeight: 'bold'}}> Payment Successful! </Typography>
+                        <Box sx={{mt:22}}>
+                            <Typography variant="h6"> Session ID: {session_id} </Typography>
+                            <Typography variant="body1"> 
+                                We have received your payment. You will receive an email with the order details shortly.  
+                            </Typography>
+                        </Box>
                     </Box>
-                    </>
                 ) : (
                     <>
-                    <Typography variant="h4"> Payment Failed! </Typography>
-                    <Box sx={{mt:22}}>
-                        <Typography variant="body1"> 
-                            Your payment was not successful. Please try again. 
+                    <Box 
+                        sx={{
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            justifyContent: 'center', 
+                            alignItems: 'center', 
+                            minHeight: '100vh', // Full height of the viewport
+                            textAlign: 'center', // Center text alignment
+                        }}
+                    >
+                        <img 
+                            src="/images/sad.png" 
+                            style={{
+                                width: '100px', // Adjust the width as needed
+                                marginBottom: '30px', // Space between the image and the text
+                            }}
+                        />
+                        <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', }}>
+                            Payment Failed!
+                        </Typography>
+                        <Typography variant="body1">
+                            Your payment was not successful. Please try again.
                         </Typography>
                     </Box>
                     </>
