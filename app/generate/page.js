@@ -354,6 +354,7 @@ export default function Generate() {
             <DialogActions>
                 <Button onClick={handleClose}
                 sx={{
+                    mb: 2,
                     backgroundColor: '#5F6F65', // Primary color
                     color: '#ffffff', // White text color
                     borderRadius: '15px', // Rounded corners
@@ -373,6 +374,8 @@ export default function Generate() {
                 <Button 
                     onClick={saveFlashcards}
                     sx={{
+                        mb: 2,
+                        mr: 2,
                         backgroundColor: '#5F6F65', // Primary color
                         color: '#ffffff', // White text color
                         borderRadius: '15px', // Rounded corners

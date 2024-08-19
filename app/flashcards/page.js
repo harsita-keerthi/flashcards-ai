@@ -154,7 +154,7 @@ export default function Flashcards() {
                 }}
               >
                 <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
-                  <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3 }}>
+                  <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 2 }}>
                     <Typography
                       variant="h6"
                       sx={{
