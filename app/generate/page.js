@@ -345,7 +345,7 @@ export default function Generate() {
                             color: '#5F6F65',
                         },
                         '& .MuiInputBase-input': {
-                            fontFamily: 'Comic Sans MS, sans-serif',
+                            fontFamily: 'sans-serif',
                         },
                     }}
                 />

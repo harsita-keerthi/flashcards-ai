@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
 import {
@@ -16,6 +16,12 @@ import {
   AppBar,
   Toolbar,
   Button,
+  Dialog,
+  IconButton,
+  DialogActions, 
+  DialogTitle, 
+  DialogContent,
+  DialogContentText,
 } from "@mui/material";
 import Head from "next/head";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -23,7 +29,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the arrow i
 import Link from "next/link";
 import Footer from '../footer';
 import HomeIcon from '@mui/icons-material/Home';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Flashcards() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -53,6 +59,21 @@ export default function Flashcards() {
   const handleCardClick = (id) => {
     router.push(`/flashcard?id=${id}`);
   };
+
+  const handleDelete = async (name) => {
+    if (!user) return;
+
+    // Remove the flashcard from the state
+    const updatedFlashcards = flashcards.filter(flashcard => flashcard.name !== name);
+    setFlashcards(updatedFlashcards);
+
+    // Update the flashcards in the Firestore document
+    const docRef = doc(collection(db, "users"), user.id);
+    await updateDoc(docRef, {
+      flashcards: updatedFlashcards
+    });
+  };
+
 
   return (
     <Container maxWidth="100vw"
@@ -133,19 +154,31 @@ export default function Flashcards() {
                 }}
               >
                 <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
-                  <CardContent>
+                  <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3 }}>
                     <Typography
                       variant="h6"
                       sx={{
                         fontWeight: "bold",
                         color: "#004d40",
-                        textAlign: "center",
+                        textAlign: "center", 
                       }}
                     >
                       {flashcard.name}
                     </Typography>
+
+                    <IconButton 
+                      aria-label="delete" 
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevents triggering the CardActionArea click
+                        handleDelete(flashcard.name);
+                      }}  
+                      sx={{ color: '#FAA0A0' }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
                   </CardContent>
                 </CardActionArea>
+              
               </Card>
             </Grid>
           ))}

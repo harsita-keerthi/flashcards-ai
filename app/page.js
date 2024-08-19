@@ -89,7 +89,7 @@ export default function Home() {
 					</Box>
 				</Link>
 
-			<Box sx={{ flexGrow: 1 }} />
+				<Box sx={{ flexGrow: 1 }} />
 				
 				<SignedOut>
 					<Button color='inherit' sx={{ borderRadius: '20px', padding: '6px 24px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2, backgroundColor: '#A6B37D', color: 'white' }} href='/sign-in'>
