@@ -4,7 +4,10 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import getStripe from "../../utils/get-stripe"
 import { useSearchParams } from "next/navigation"
-import { Box, CircularProgress, Container, Typography } from "@mui/material"
+import { AppBar, Box, CircularProgress, Container, Toolbar, Typography, Button } from "@mui/material"
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Link from "next/link";
+
 
 const ResultPage = () => {
     const router = useRouter()
@@ -91,6 +94,42 @@ const ResultPage = () => {
                 minHeight: '100vh', paddingBottom: 4 
             }}
             >
+
+            <AppBar position='static' 
+                sx={{ 
+                    width: '100%', 
+                    background: '#5F6F65',
+                    borderRadius: '0 0 16px 16px'
+                }}
+                >                
+                <Toolbar sx={{ px: 2 }}>
+                    <Link href="/" passHref style={{ color: 'white', textDecoration: 'none' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+                            {/* <HomeIcon sx={{ color: 'inherit' }} /> */}
+                            <img src="/images/home.png" style={{ width: '24px', height: '24px' }} />
+                            <Typography variant='h6' style={{ fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+                                MemoAI
+                            </Typography>
+                        </Box>
+                    </Link>
+
+                    <Box sx={{ flexGrow: 1 }} />
+                    
+                    <SignedOut>
+                        <Button color='inherit' sx={{ borderRadius: '20px', padding: '6px 24px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', mr: 2, backgroundColor: '#A6B37D', color: 'white' }} href='/sign-in'>
+                            Login
+                        </Button>
+                        <Button color='inherit' sx={{ borderRadius: '20px', padding: '6px 18px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', backgroundColor: '#A6B37D', color: 'white' }} href='/sign-up'>
+                            Sign Up
+                        </Button>
+                    </SignedOut>
+
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </Toolbar>
+            </AppBar>
+
                 {session.payment_status === "paid" ? (
                     <Box
                     sx={{
@@ -124,7 +163,7 @@ const ResultPage = () => {
                             flexDirection: 'column', 
                             justifyContent: 'center', 
                             alignItems: 'center', 
-                            minHeight: '100vh', // Full height of the viewport
+                            maxHeight: '100vh', // Full height of the viewport
                             textAlign: 'center', // Center text alignment
                         }}
                     >
@@ -133,6 +172,7 @@ const ResultPage = () => {
                             style={{
                                 width: '100px', // Adjust the width as needed
                                 marginBottom: '30px', // Space between the image and the text
+                                marginTop: '130px' 
                             }}
                         />
                         <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', }}>

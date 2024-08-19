@@ -82,7 +82,8 @@ export default function Home() {
 			<Toolbar sx={{ px: 2 }}>
 				<Link href="/" passHref style={{ color: 'white', textDecoration: 'none' }}>
 					<Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
-						<HomeIcon sx={{ color: 'inherit' }} />
+						{/* <HomeIcon sx={{ color: 'inherit' }} /> */}
+						<img src="/images/home.png" style={{ width: '24px', height: '24px' }} />
 						<Typography variant='h6' style={{ fontWeight: 'bold', fontFamily: 'sans-serif' }}>
 							MemoAI
 						</Typography>
