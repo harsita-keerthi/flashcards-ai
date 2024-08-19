@@ -1,4 +1,5 @@
 'use client'
+
 import {useUser} from '@clerk/nextjs'
 import {useEffect, useState} from 'react'
 
@@ -48,7 +49,8 @@ export default function Flashcards(){
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                </Card></Grid>
+                </Card>
+            </Grid>
             ))}
         </Grid>
     </Container>

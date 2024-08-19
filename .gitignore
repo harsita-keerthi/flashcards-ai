@@ -19,10 +19,10 @@
 
 # misc
 .DS_Store
-*.pem
+.pem
 
 # debug
-npm-debug.log*
+npm-debug.log
 yarn-debug.log*
 yarn-error.log*
 
@@ -31,7 +31,7 @@ yarn-error.log*
 .env.local
 
 # firebase
-*firebase.js*
+firebase.js
 
 # vercel
 .vercel

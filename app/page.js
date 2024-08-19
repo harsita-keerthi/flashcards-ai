@@ -7,6 +7,28 @@ import { AppBar, Button, Container, Toolbar, Typography, Box, Grid } from '@mui/
 import Head from 'next/head';
 
 export default function Home() {
+	const handleSubmit = async () => {
+		const checkoutSession = await fetch('/api/checkout_sessions', {
+		  method: 'POST',
+		  headers: { origin: 'http://localhost:3000' },
+		})
+		const checkoutSessionJson = await checkoutSession.json()
+
+		if (checkoutSession.statusCode === 500) {
+			console.error(checkoutSession.message)
+			return
+		}
+	  
+		const stripe = await getStripe()
+		const {error} = await stripe.redirectToCheckout({
+		  sessionId: checkoutSessionJson.id,
+		})
+	  
+		if (error) {
+		  console.warn(error.message)
+		}
+	  }
+
 	return (
 		<Container maxWidth='100vw'>
 			<Head>
@@ -142,7 +164,7 @@ export default function Home() {
 								$5 / month
 							</Typography>
 							<Typography>Access to basic flashcard features and limited storage.</Typography>
-							<Button variant='contained' color='primary' sx={{ mt: 2 }}>
+							<Button variant='contained' color='primary' sx={{ mt: 2 }} onClick={handleSubmit}>
 								CHOOSE BASIC
 							</Button>
 						</Box>
@@ -167,7 +189,7 @@ export default function Home() {
 								$10 / month
 							</Typography>
 							<Typography>Unlimited flashcards and storage, with priority support.</Typography>
-							<Button variant='contained' color='secondary' sx={{ mt: 2 }}>
+							<Button variant='contained' color='secondary' sx={{ mt: 2 }} onClick={handleSubmit}>
 								CHOOSE PRO
 							</Button>
 						</Box>
@@ -222,4 +244,4 @@ export default function Home() {
 			</Box>
 		</Container>
 	);
-}
+	}

@@ -4,14 +4,14 @@
 import { useUser } from "@clerk/nextjs"
 import { db } from "@/firebase"
 import { Container, Card, CardActionArea, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, CardContent, Grid, Box, Typography, Paper, TextField, Button } from "@mui/material"
-import { DocumentSnapshot, writeBatch, getDoc, collection, doc, setDoc } from "firebase/firestore"
+import { writeBatch, getDoc, collection, doc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function Generate() {
     const {isLoaded, isSignedIn, user} = useUser()
     const [flashcards, setFlashcards] = useState([])
-    const[flipped, setFlipped] = useState([])
+    const [flipped, setFlipped] = useState([])
     const [text, setText] = useState('')
     const [name, setName] = useState('')
     const [open, setOpen] = useState(false)
@@ -22,22 +22,8 @@ export default function Generate() {
             method: 'POST',
             body: text, 
         })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.text(); // Read the response as text
-        })
-        .then((text) => {
-            try {
-                return text ? JSON.parse(text) : {}; // Parse JSON only if there's text
-            } catch (error) {
-                console.error('Failed to parse JSON:', error);
-                return {}; // Return an empty object if parsing fails
-            }
-        })
+        .then((res) => res.json())
         .then((data) => setFlashcards(data))
-        .catch((error) => console.error('Error:', error));
     };
     
 
@@ -83,9 +69,9 @@ export default function Generate() {
         }
 
         const colRef = collection(userDocRef, name)
-        flashcards.forEach((flashcards) => {
+        flashcards.forEach((flashcard) => {
             const cardDocRef = doc(colRef)
-            batch.set(cardDocRef, flashcards)
+            batch.set(cardDocRef, flashcard)
         })
 
         await batch.commit()
@@ -119,10 +105,10 @@ export default function Generate() {
         </Box>
         {flashcards.length > 0 && (
             <Box sx={{mt:4}}>
-                <Typography variant="h5" component="h2" gutterBottom>
-                    Generated Flashcards
+                <Typography variant="h5">
+                    Flashcards Preview
                 </Typography>
-                <Grid container spacing={2}>
+                <Grid container spacing={3}>
                     {flashcards.map((flashcard, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
                             <Card>
@@ -140,7 +126,7 @@ export default function Generate() {
                                                 height: '200px',
                                                 boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
                                                 transform: flipped[index]
-                                                    ? 'rotateY(180deg'
+                                                    ? 'rotateY(180deg)'
                                                     : 'rotateY(0deg)',
                                             },
                                             '& > div > div': {
@@ -152,7 +138,7 @@ export default function Generate() {
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                                 padding: 2,
-                                                boxSising: 'border-box',
+                                                boxSizing: 'border-box',
                                             },
                                             '& > div > div:nth-of-type(2)':{
                                                 transform: 'rotateY(180deg)',
@@ -160,10 +146,10 @@ export default function Generate() {
                                         }}>
                                             <div>
                                                 <div>
-                                                    <Typography variant="h6" component="div">{flashcard.front}</Typography>
+                                                    <Typography variant="h5" component="div">{flashcard.front}</Typography>
                                                 </div>
                                                 <div>
-                                                    <Typography variant="h6" sx={{margin:2}} component="div">{flashcard.back}</Typography>
+                                                    <Typography variant="h5" sx={{margin:2}} component="div">{flashcard.back}</Typography>
                                                 </div>
                                             </div>
                                         </Box>
