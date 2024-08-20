@@ -314,7 +314,7 @@ export default function Home() {
 						gutterBottom
 						sx={{ fontWeight: "bold", color: "#424242" }}
 					>
-						Free
+						Basic
 					</Typography>
 					<Typography
 						variant="h6"
@@ -343,61 +343,6 @@ export default function Home() {
 						href="/sign-in"
 					>
 						Get Started
-					</Button>
-					</Box>
-				</Grid>
-
-				<Grid item xs={12} md={4}>
-					<Box
-					sx={{
-						p: 4,
-						mt: 2,
-						border: "1px solid",
-						borderColor: "grey.300",
-						borderRadius: 4,
-						backgroundColor: "#f5f5f5",
-						boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.05)",
-						transition: "transform 0.3s ease, box-shadow 0.3s ease",
-						"&:hover": {
-						transform: "translateY(-8px)",
-						boxShadow: "0px 6px 18px rgba(0, 0, 0, 0.1)",
-						},
-					}}
-					>
-					<Typography
-						variant="h5"
-						gutterBottom
-						sx={{ fontWeight: "bold", color: "#424242" }}
-					>
-						Basic
-					</Typography>
-					<Typography
-						variant="h6"
-						gutterBottom
-						sx={{
-						color: "#757575",
-						fontWeight: "600",
-						"-webkit-text-stroke": "1px #5F6F65",
-						}}
-					>
-						$5 / month
-					</Typography>
-					<Typography color="textSecondary">
-						Access to basic flashcard features and limited storage.
-					</Typography>
-					<Button
-						variant="outlined"
-						sx={{
-						mt: 2,
-						borderColor: "#757575",
-						color: "#757575",
-						textTransform: "none",
-						padding: "8px 24px",
-						borderRadius: 4,
-						}}
-						onClick={handleSubmit}
-					>
-						Choose Basic
 					</Button>
 					</Box>
 				</Grid>
